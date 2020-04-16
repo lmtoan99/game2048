@@ -6,4 +6,33 @@
     <color name="subjectColor">#DDD48E</color>
     <color name="backgroundSubject">#E0D6B7</color>
     <color name="colorBtn">#FFFFFF</color>
+    <array name="colorSquare">
+        <item>#A5B9E8</item>
+        <item>#E6D765</item>
+        <item>#6AD98B</item>
+        <item>#E6B940</item>
+        <item>#D67EC5</item>
+        <item>#E8A033</item>
+        <item>#F28888</item>
+        <item>#D18A58</item>
+        <item>#B596E3</item>
+        <item>#75D15D</item>
+        <item>#DBAF6E</item>
+        <item>#65D8DB</item>
+    </array>
+
+    <array name="backgroundColor">
+        <item>#364E77</item>
+        <item>#7E7536</item>
+        <item>#2D5C41</item>
+        <item>#68521B</item>
+        <item>#633A58</item>
+        <item>#684916</item>
+        <item>#703F3F</item>
+        <item>#553924</item>
+        <item>#514364</item>
+        <item>#2B4B22</item>
+        <item>#685434</item>
+        <item>#306568</item>
+    </array>
 </resources>

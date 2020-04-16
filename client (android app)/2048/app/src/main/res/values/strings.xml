@@ -3,4 +3,7 @@
     <string name="new_game">new game</string>
     <string name="resume">resume</string>
     <string name="charts">charts</string>
+    <string name="highest">highest</string>
+    <string name="score">score</string>
+    <string name="exit">exit</string>
 </resources>

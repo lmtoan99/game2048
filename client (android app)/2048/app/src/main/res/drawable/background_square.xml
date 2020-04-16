@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Set màu nền-->
+    <solid
+        android:color="@android:color/darker_gray" >
+    </solid>
+
+    <!-- các thuộc tính căn chỉnh-->
+    <margin
+        android:left="3dp"
+        android:top="3dp"
+        android:right="3dp"
+        android:bottom="3dp" >
+    </margin>
+
+    <!-- và đây là bán kính đường tròn ở 4 góc -->
+    <corners
+        android:radius="10dp">
+    </corners>
+
+</shape>
