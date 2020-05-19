@@ -1,18 +1,17 @@
 package com.letoan.api;
 
 import com.letoan.entity.UserEntity;
+import com.letoan.exception.NotFoundException;
 import com.letoan.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.letoan.model.*;
+import com.letoan.exception.*;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Calendar;
 
@@ -21,21 +20,18 @@ public class userAPI {
     @Autowired
     private UserService userService;
 
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
     @PostMapping(value = "/user/register")
     public String createUser(@RequestBody RequestRegister rq){
         UserEntity check = userService.findByUsername(rq.getUsername());
         if (check != null){
-            ResponseEntity.notFound();
-            return null;
+            throw new CreatedException(rq.getUsername());
         }
         long create_time = Calendar.getInstance().getTime().getTime();
         String user_token = generateUserToken();
 
         String pwHash = hashPassword(rq.getPassword(),create_time);
-        UserEntity userEntity = new UserEntity(rq.getUsername(), pwHash, user_token, rq.getDisplay_name(), create_time);
-        userService.save(userEntity);
+
+        userService.save(new UserEntity(rq.getUsername(), pwHash, user_token, rq.getDisplay_name(), create_time));
 
         return user_token;
     }
@@ -44,8 +40,7 @@ public class userAPI {
     public String loginUser(@RequestBody RequestLogin rq){
         UserEntity userEntity = userService.findByUsername(rq.getUsername());
         if (userEntity == null){
-            ResponseEntity.notFound();
-            return null;
+            throw new NotFoundException();
         }
         String raw_password = rq.getPassword();
         String hash_password = hashPassword(raw_password,userEntity.getCreateTime());
@@ -54,8 +49,7 @@ public class userAPI {
             return userEntity.getUserToken();
         }
         else{
-            ResponseEntity.notFound();
-            return null;
+            throw new NotFoundException();
         }
     }
 
