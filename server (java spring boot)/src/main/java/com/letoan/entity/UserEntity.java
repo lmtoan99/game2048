@@ -26,7 +26,7 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String username, String password, String userToken, String displayName, long createTime) {
+    /*public UserEntity(String username, String password, String userToken, String displayName, long createTime) {
         this.username = username;
         this.password = password;
         this.userToken = userToken;
@@ -35,6 +35,16 @@ public class UserEntity {
         System.out.println("UserEntity: " + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(createTime));
         this.score = 0;
         this.scoreTime = 0;
+    }*/
+
+    public UserEntity(String username, String password, String userToken, String displayName, long createTime, int score, int scoreTime) {
+        this.username = username;
+        this.password = password;
+        this.userToken = userToken;
+        this.displayName = displayName;
+        this.createTime = createTime;
+        this.score = score;
+        this.scoreTime = scoreTime;
     }
 
     public String getUsername() {

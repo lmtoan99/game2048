@@ -21,7 +21,7 @@ public class userAPI {
     private UserService userService;
 
     @PostMapping(value = "/user/register")
-    public String createUser(@RequestBody RequestRegister rq){
+    public UserEntity createUser(@RequestBody RequestRegister rq){
         UserEntity check = userService.findByUsername(rq.getUsername());
         if (check != null){
             throw new CreatedException(rq.getUsername());
@@ -31,13 +31,14 @@ public class userAPI {
 
         String pwHash = hashPassword(rq.getPassword(),create_time);
 
-        userService.save(new UserEntity(rq.getUsername(), pwHash, user_token, rq.getDisplay_name(), create_time));
+        UserEntity newUser = new UserEntity(rq.getUsername(), pwHash, user_token, rq.getDisplay_name(), create_time,0,0);
+        userService.save(newUser);
 
-        return user_token;
+        return newUser;
     }
 
     @PostMapping(value = "/user/login")
-    public String loginUser(@RequestBody RequestLogin rq){
+    public UserEntity loginUser(@RequestBody RequestLogin rq){
         UserEntity userEntity = userService.findByUsername(rq.getUsername());
         if (userEntity == null){
             throw new NotFoundException();
@@ -46,11 +47,49 @@ public class userAPI {
         String hash_password = hashPassword(raw_password,userEntity.getCreateTime());
 
         if (hash_password.equals(userEntity.getPassword())){
-            return userEntity.getUserToken();
+            userEntity.setPassword(null);
+            return userEntity;
         }
         else{
             throw new NotFoundException();
         }
+    }
+
+
+    @PostMapping(value = "/score/newhigh")
+    public ResponseMessage newHighScore(@RequestBody RequestHighScore rq){
+        UserEntity userEntity = userService.findByUserToken(rq.getUserToken());
+        if (userEntity==null){
+            throw new NotFoundException();
+        }else {
+            userEntity.setScore(rq.getScore());
+            userEntity.setScoreTime(rq.getScoreTime());
+            userService.save(userEntity);
+            return new ResponseMessage("Success");
+        }
+    }
+
+    @PostMapping(value = "/score/gethigh")
+    public UserEntity getHighScore(@RequestBody RequestGet rq){
+        UserEntity userEntity = userService.findByUserToken(rq.getUserToken());
+        if (userEntity==null){
+            throw new NotFoundException();
+        }else{
+            userEntity.setPassword(null);
+            return userEntity;
+        }
+    }
+
+    @GetMapping(value = "/score/toprank")
+    public TopRank[] getTopRank(){
+        return userService.getTopRank(3);
+    }
+
+    @PostMapping(value = "/score/myrank")
+    public TopRank getMyRank(@RequestBody RequestGet rq){
+        UserEntity userEntity = userService.findByUserToken(rq.getUserToken());
+        int rank = userService.getRank(userEntity);
+        return new TopRank(rank,userEntity.getDisplayName(),userEntity.getScore(),userEntity.getScoreTime());
     }
 
     private String hashPassword(String password, long salt){
@@ -77,4 +116,5 @@ public class userAPI {
         secureRandom.nextBytes(randomBytes);
         return base64Encoder.encodeToString(randomBytes);
     }
+
 }

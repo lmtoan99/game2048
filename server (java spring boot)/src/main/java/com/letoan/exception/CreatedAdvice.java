@@ -1,5 +1,6 @@
 package com.letoan.exception;
 
+import com.letoan.model.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,7 +12,7 @@ public class CreatedAdvice {
     @ResponseBody
     @ExceptionHandler(CreatedException.class)
     @ResponseStatus(HttpStatus.CREATED)
-    String createdHandler(CreatedException ex){
-        return ex.getMessage();
+    ResponseMessage createdHandler(CreatedException ex){
+        return new ResponseMessage(ex.getMessage());
     }
 }

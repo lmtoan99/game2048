@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class NotFoundAdvice {
+public class ExceptionAdvice {
     @ResponseBody
-    @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    ResponseMessage notFoundHandler(NotFoundException ex){
-        return new ResponseMessage(ex.getMessage());
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    ResponseMessage exceptionHandler(Exception ex){
+        return new ResponseMessage("Have some error on server");
+        //return new ResponseMessage(ex.getMessage());
     }
 }
