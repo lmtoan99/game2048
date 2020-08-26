@@ -1,7 +1,7 @@
 package com.letoan.service.impl;
 
 import com.letoan.entity.UserEntity;
-import com.letoan.model.TopRank;
+import com.letoan.model.Rank;
 import com.letoan.repository.UserRepository;
 import com.letoan.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,21 +35,20 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public TopRank[] getTopRank(int top) {
-        List<UserEntity> query = userRepository.findAll(PageRequest.of(0,top, Sort.by(Sort.Direction.DESC,"score","scoreTime"))).getContent();
-        TopRank[] rs = new TopRank[query.size()];
+    public Rank[] getTopRank(int top) {
+        List<UserEntity> query = userRepository.findAll(PageRequest.of(0,top, Sort.by(Sort.Direction.DESC,"score"))).getContent();
+        Rank[] rs = new Rank[query.size()];
         for (int i = 0; i < query.size(); i++) {
-            rs[i] = new TopRank();
-            rs[i].setRank(i);
+            rs[i] = new Rank();
+            rs[i].setRank(i + 1);
             rs[i].setDisplayName(query.get(i).getDisplayName());
             rs[i].setScore(query.get(i).getScore());
-            rs[i].setScoreTime(query.get(i).getScoreTime());
         }
         return rs;
     }
 
     @Override
     public int getRank(UserEntity userEntity) {
-        return userRepository.findRank(userEntity.getScore(),userEntity.getScoreTime());
+        return userRepository.findRank(userEntity.getScore()) + 1;
     }
 }

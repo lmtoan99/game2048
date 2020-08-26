@@ -1,50 +1,20 @@
 package com.letoan.model;
 
 public class TopRank {
-    private int rank;
-    private String displayName;
-    private int score;
-    private int scoreTime;
+    Rank[] topRank;
 
     public TopRank() {
     }
 
-    public TopRank(int rank, String displayName, int score, int scoreTime) {
-        this.rank = rank;
-        this.displayName = displayName;
-        this.score = score;
-        this.scoreTime = scoreTime;
+    public TopRank(Rank[] topRank) {
+        this.topRank = topRank;
     }
 
-    public int getRank() {
-        return rank;
+    public Rank[] getTopRank() {
+        return topRank;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getScoreTime() {
-        return scoreTime;
-    }
-
-    public void setScoreTime(int scoreTime) {
-        this.scoreTime = scoreTime;
+    public void setTopRank(Rank[] topRank) {
+        this.topRank = topRank;
     }
 }

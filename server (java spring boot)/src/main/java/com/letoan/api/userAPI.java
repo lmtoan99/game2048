@@ -31,8 +31,9 @@ public class userAPI {
 
         String pwHash = hashPassword(rq.getPassword(),create_time);
 
-        UserEntity newUser = new UserEntity(rq.getUsername(), pwHash, user_token, rq.getDisplay_name(), create_time,0,0);
+        UserEntity newUser = new UserEntity(rq.getUsername(), pwHash, user_token, rq.getDisplay_name(), create_time,0);
         userService.save(newUser);
+        newUser.setPassword(null);
 
         return newUser;
     }
@@ -63,7 +64,6 @@ public class userAPI {
             throw new NotFoundException();
         }else {
             userEntity.setScore(rq.getScore());
-            userEntity.setScoreTime(rq.getScoreTime());
             userService.save(userEntity);
             return new ResponseMessage("Success");
         }
@@ -81,15 +81,15 @@ public class userAPI {
     }
 
     @GetMapping(value = "/score/toprank")
-    public TopRank[] getTopRank(){
-        return userService.getTopRank(3);
+    public TopRank getTopRank(){
+        return new TopRank(userService.getTopRank(3));
     }
 
     @PostMapping(value = "/score/myrank")
-    public TopRank getMyRank(@RequestBody RequestGet rq){
+    public Rank getMyRank(@RequestBody RequestGet rq){
         UserEntity userEntity = userService.findByUserToken(rq.getUserToken());
         int rank = userService.getRank(userEntity);
-        return new TopRank(rank,userEntity.getDisplayName(),userEntity.getScore(),userEntity.getScoreTime());
+        return new Rank(rank,userEntity.getDisplayName(),userEntity.getScore());
     }
 
     private String hashPassword(String password, long salt){

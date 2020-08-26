@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ControllerAdvice
+/*@ControllerAdvice
 public class ExceptionAdvice {
     @ResponseBody
     @ExceptionHandler(Exception.class)
@@ -16,4 +16,4 @@ public class ExceptionAdvice {
         return new ResponseMessage("Have some error on server");
         //return new ResponseMessage(ex.getMessage());
     }
-}
+}*/

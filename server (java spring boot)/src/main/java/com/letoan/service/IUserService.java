@@ -1,12 +1,12 @@
 package com.letoan.service;
 
 import com.letoan.entity.UserEntity;
-import com.letoan.model.TopRank;
+import com.letoan.model.Rank;
 
 public interface IUserService {
     UserEntity save(UserEntity user);
     UserEntity findByUsername(String username);
     UserEntity findByUserToken(String userToken);
-    TopRank[] getTopRank(int top);
+    Rank[] getTopRank(int top);
     int getRank(UserEntity userEntity);
 }

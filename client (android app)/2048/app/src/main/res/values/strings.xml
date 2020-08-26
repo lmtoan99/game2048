@@ -6,4 +6,14 @@
     <string name="highest">highest</string>
     <string name="score">score</string>
     <string name="exit">exit</string>
+    <string name="your_rank">Your rank</string>
+    <string name="your_high_score">Your high score</string>
+    <string name="ranking">ranking</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="Login">login</string>
+    <string name="register">register</string>
+    <string name="register_login">Already have an account?</string>
+    <string name="login_register">Don\'t have an account?</string>
+    <string name="logout">log out</string>
 </resources>

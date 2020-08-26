@@ -5,37 +5,38 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_shadow"
     android:gravity="center">
-    <LinearLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@mipmap/menu_image_foreground"/>
+        android:layout_height="200dp"
+        android:src="@mipmap/menu_image_foreground"/>
 
-        <Button
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/newgame"
-            android:background="@drawable/custom_button"
-            android:text="@string/new_game"/>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/newgame"
+        android:background="@drawable/custom_button"
+        android:text="@string/new_game"/>
 
-        <Button
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/resume"
-            android:background="@drawable/custom_button"
-            android:text="@string/resume"/>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/resume"
+        android:background="@drawable/custom_button"
+        android:text="@string/resume"/>
 
-        <Button
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:id="@+id/charts"
-            android:background="@drawable/custom_button"
-            android:text="@string/charts"/>
-    </LinearLayout>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/charts"
+        android:background="@drawable/custom_button"
+        android:text="@string/ranking"/>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/logout"
+        android:background="@drawable/custom_button"
+        android:text="@string/logout"/>
 </LinearLayout>
